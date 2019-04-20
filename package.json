@@ -1,0 +1,27 @@
+{
+  "name": "dkpn_bot",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "discord.js": "^11.4.2",
+    "ffmpeg-binaries": "^4.0.0",
+    "node-opus": "^0.3.1",
+    "opusscript": "^0.0.6",
+    "youtube-regex": "^1.0.5",
+    "ytdl-core": "^0.29.1"
+  },
+  "devDependencies": {
+    "dotenv": "^7.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryoobara/DKPN-BOT.git"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryo Obara",
+  "license": "MIT"
+}
