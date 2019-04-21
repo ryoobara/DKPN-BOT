@@ -36,6 +36,6 @@ module.exports = message => {
         })
       .catch(console.error);
   } else {
-    message.channel.send('まずはボイスチャンネルに入ろうか');
+    return message.reply('まずはボイスチャンネルに入ろうか');
   }
 };
