@@ -2,11 +2,9 @@
 
 /* Youtubeの音声を流す */
 
-const youtubeRegex = require('youtube-regex');
 const ytdl = require('ytdl-core');
 
-const streamOptions = {seek: 0, volume: 0.1};
-// const sansBlackEyesImage = 'https://ih1.redbubble.net/image.556755792.8056/flat,550x550,075,f.u5.jpg';
+const streamOptions = {seek: 0, volume: 0.05};
 
 module.exports = message => {
   const sender = message.member; // 送信者
@@ -17,7 +15,7 @@ module.exports = message => {
 停止したかったら \`!stop\` な。`);
   }
   // urlをチェック
-  if (!youtubeRegex().test(url)) {
+  if (!ytdl.validateURL(url)) {
     return message.reply('URLあってる？');
   }
   if (voiceChannel) {
