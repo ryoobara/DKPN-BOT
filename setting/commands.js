@@ -10,6 +10,7 @@ const getThumbnail = require('../functions/getThumbnail.js');
 const recommendedCar = require('../functions/recommendedCar.js');
 const stopMusic = require('../functions/stopMusic.js');
 const playYoutube = require('../functions/playYoutube.js');
+const searchYoutube = require('../functions/searchYoutube.js');
 
 module.exports = [
   {
@@ -71,5 +72,11 @@ module.exports = [
     key: '!stop, !s',
     description: '音楽をやめます',
     func: (message) => stopMusic(message)
+  },
+  {
+    regex: new RegExp(/^!youtube $/),
+    key: '!youtube {検索ワード}',
+    description: '検索された先頭の動画を再生します',
+    func: (message) => searchYoutube(message)
   }
 ]
