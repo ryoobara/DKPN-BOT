@@ -6,12 +6,11 @@ const ytdl = require('ytdl-core');
 const youtube = require('youtube-node');
 const youtubeSearch = new youtube();
 
-youtubeSearch.setKey(process.env.YOUTUBE_API_KEY);
 youtubeSearch.addParam('type', 'video');
 youtubeSearch.addParam('regionCode', 'JP');
 
 const streamOptions = {seek: 0, volume: 0.05};
-const searchResultsNum = 1;
+const searchResultsNum = 5;
 const YOUTUBE_BASE_PATH = `https://www.youtube.com/watch?v=`;
 
 module.exports = message => {
@@ -22,9 +21,10 @@ module.exports = message => {
     return message.reply(`再生中だぜ。
 停止したかったら \`!stop\` な。`);
   }
-  if (keywords) {
+  if (!keywords) {
     return message.reply('キーワードがないぞ？');
   }
+  youtubeSearch.setKey(process.env.YOUTUBE_API_KEY);
   youtubeSearch.search(keywords, searchResultsNum, (err, result) => {
     if (err) {
       console.log(err);
@@ -33,7 +33,16 @@ module.exports = message => {
     if (result.items.length === 0) {
       return message.reply('何も見つからなかったな。');
     }
-    const videoId = result.items[0].id.videoId;
+    let i = 0;
+    let videoId = '';
+    // videoIdが取得できるまで先頭から探す
+    while (i < result.items.length && videoId === '') {
+      videoId = result.items[i].id && result.items[i].id.videoId ? result.items[i].id.videoId : '';
+      i++;
+    }
+    if (!videoId) {
+      return message.reply('何も見つからなかったな。');
+    }
     if (voiceChannel) {
       // 同じボイスチャンネルに接続
       return voiceChannel.join()

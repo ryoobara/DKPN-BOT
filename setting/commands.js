@@ -74,7 +74,7 @@ module.exports = [
     func: (message) => stopMusic(message)
   },
   {
-    regex: new RegExp(/^!youtube $/),
+    regex: new RegExp(/^!youtube /),
     key: '!youtube {検索ワード}',
     description: '検索された先頭の動画を再生します',
     func: (message) => searchYoutube(message)
