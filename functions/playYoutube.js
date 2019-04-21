@@ -5,6 +5,7 @@
 const ytdl = require('ytdl-core');
 
 const streamOptions = {seek: 0, volume: 0.05};
+const YOUTUBE_BASE_PATH = `https://www.youtube.com/watch?v=`;
 
 module.exports = message => {
   const sender = message.member; // 送信者
@@ -18,11 +19,15 @@ module.exports = message => {
   if (!ytdl.validateURL(url)) {
     return message.reply('URLあってる？');
   }
+  let videoId = ytdl.getURLVideoID(url);
+  if (!ytdl.validateID(videoId)) {
+    return message.reply('動画のID間違ってるぞ');
+  }
   if (voiceChannel) {
     // 同じボイスチャンネルに接続
     return voiceChannel.join()
       .then(connection => {
-        const stream = ytdl(url, {quality: 'lowestaudio',filter : 'audioonly'});
+        const stream = ytdl(`${YOUTUBE_BASE_PATH}${videoId}`, {quality: 'lowestaudio',filter : 'audioonly'});
         const dispatcher = connection.playStream(stream, streamOptions);
           dispatcher.on('end', reason => {
             console.log(reason);
