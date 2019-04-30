@@ -29,6 +29,7 @@ module.exports = message => {
   }
   // URLの場合とキーワードの場合で処理を分ける
   if (ytdl.validateURL(query)) {
+    const videoId = ytdl.getVideoID(query);
     if (voiceChannel) {
       // 同じボイスチャンネルに接続
       return voiceChannel.join()
