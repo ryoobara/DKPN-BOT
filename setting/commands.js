@@ -15,7 +15,7 @@ const searchYoutube = require('../functions/searchYoutube.js');
 module.exports = [
   {
       regex: new RegExp(/^!help$|^!h$/),
-      key: '!help, !h',
+      key: '!help(!h)',
       description: 'ヘルプを表示します',
       func: (message) => help(message)
   },
@@ -69,7 +69,7 @@ module.exports = [
   },
   {
     regex: new RegExp(/^!s$|^!stop$/),
-    key: '!stop, !s',
+    key: '!stop(!s)',
     description: '音楽をやめます',
     func: (message) => stopMusic(message)
   }
