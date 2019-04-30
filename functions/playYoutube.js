@@ -7,7 +7,7 @@ const ytdl = require('ytdl-core');
 const youtube = require('youtube-node');
 const youtubeSearch = new youtube();
 
-youtubeSearch.addParam('videoType', 'movie');
+youtubeSearch.addParam('type', 'video');
 youtubeSearch.addParam('regionCode', 'JP');
 
 const youtubeStreamOptions = {quality: 'highestaudio',filter : 'audioonly'};
