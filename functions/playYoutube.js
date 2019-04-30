@@ -27,7 +27,7 @@ module.exports = message => {
     // 同じボイスチャンネルに接続
     return voiceChannel.join()
       .then(connection => {
-        const stream = ytdl(`${YOUTUBE_BASE_PATH}${videoId}`, {quality: 'lowestaudio',filter : 'audioonly'});
+        const stream = ytdl(`${YOUTUBE_BASE_PATH}${videoId}`, {quality: 'highestaudio',filter : 'audioonly'});
         const dispatcher = connection.playStream(stream, streamOptions);
           dispatcher.on('end', reason => {
             console.log(reason);
