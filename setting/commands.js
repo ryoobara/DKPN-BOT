@@ -10,12 +10,11 @@ const getThumbnail = require('../functions/getThumbnail.js');
 const recommendedCar = require('../functions/recommendedCar.js');
 const stopMusic = require('../functions/stopMusic.js');
 const playYoutube = require('../functions/playYoutube.js');
-const searchYoutube = require('../functions/searchYoutube.js');
 
 module.exports = [
   {
       regex: new RegExp(/^!help$|^!h$/),
-      key: '!help, !h',
+      key: '!help(!h)',
       description: 'ヘルプを表示します',
       func: (message) => help(message)
   },
@@ -62,21 +61,15 @@ module.exports = [
       func: (message) => recommendedCar(message)
   },
   {
-      regex: new RegExp(/^!play /),
-      key: '!play {聞きたいyoutubeの動画のURL}',
-      description: '音楽を流します',
-      func: (message) => playYoutube(message)
+    regex: new RegExp(/^!y |^!youtube /),
+    key: '!youtube(!y) {検索ワード or 動画のURL}',
+    description: 'youtubeの音声を再生します',
+    func: (message) => playYoutube(message)
   },
   {
     regex: new RegExp(/^!s$|^!stop$/),
-    key: '!stop, !s',
+    key: '!stop(!s)',
     description: '音楽をやめます',
     func: (message) => stopMusic(message)
-  },
-  {
-    regex: new RegExp(/^!youtube /),
-    key: '!youtube {検索ワード}',
-    description: '検索された先頭の動画を再生します',
-    func: (message) => searchYoutube(message)
   }
 ]
